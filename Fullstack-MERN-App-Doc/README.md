@@ -81,6 +81,7 @@ nodemon is a tool that helps develop Node.js based applications by automatically
     import { v2 as cloudinary }  from 'cloudinary';
     import { CloudinaryStorage } from "multer-storage-cloudinary";
 ```
+
 ### 2.2 - packages configuration
 
 - [express](https://github.com/expressjs/express)
@@ -107,6 +108,8 @@ nodemon is a tool that helps develop Node.js based applications by automatically
 #### 3.2.1 - MongoDB Drivers: mongodb, mongoose
 
 - [mongodb](https://www.npmjs.com/package/mongodb)
+
+```
         const { MongoClient } = require('mongodb');
         let dbconnect;
         const uri = "mongodb+srv://<username>:<password>@cluster0.4x2jx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -124,11 +127,14 @@ nodemon is a tool that helps develop Node.js based applications by automatically
             },
             getDb:() => dbconnect
         }
+```
+
 - [mongoose](https://www.npmjs.com/package/mongoose)
 
 #### 3.2.2 - Cursors & Fetching Data
 
 - Fetching Data
+
 ```
         // Route
         app.get('/books', (req, res) => {
@@ -145,6 +151,7 @@ nodemon is a tool that helps develop Node.js based applications by automatically
               })
         });
 ```
+
 #### 3.2.3 - Finding Single Documents
 
 ```
@@ -169,6 +176,7 @@ nodemon is a tool that helps develop Node.js based applications by automatically
 #### 3.2.4 - Inserting, Updating, and Deleting Documents
 
 - Inserting Documents
+
 ```
             app.post('/books', (req, res) => {
                 const book = req.body;
@@ -184,6 +192,7 @@ nodemon is a tool that helps develop Node.js based applications by automatically
 ```
 
 - Updating Documents (patch request)
+
 ```
             app.patch('/books/:id', (req, res) => {
                 const updates = req.body;
@@ -200,8 +209,10 @@ nodemon is a tool that helps develop Node.js based applications by automatically
                     res.status(500).json({ error: 'invalid book id' });
                 }
             })
-```  
+```
+
 - Deleting Documents
+
 ```
             app.delete('/books/:id', (req, res) => {
             if (!ObjectId.isValid(req.params.id)) {
@@ -243,6 +254,7 @@ nodemon is a tool that helps develop Node.js based applications by automatically
                 })
         })
 ```
+
 #### 3.2.6 - Indexes
 
 ```	
