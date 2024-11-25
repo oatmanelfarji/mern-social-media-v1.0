@@ -24,6 +24,9 @@ import settingsRoutes from "./routes/settings.js";
 import postRoutes from "./routes/posts.js";
 import messageRouter from "./routes/messages.js";
 import conversationRouter from "./routes/conversations.js";
+// data import
+import Post from "./models/Post.js";
+import { users, posts } from "./data/index.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -180,6 +183,9 @@ mongoose
   })
   .then(() => {
     server.listen(PORT, () => console.log(`Server connected on Port: ${PORT}`));
+
+    //User.insertMany(users);
+    //Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect to server`));
 

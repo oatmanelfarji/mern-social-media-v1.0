@@ -6,6 +6,8 @@ import {
   useMediaQuery,
   Typography,
   useTheme,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
@@ -25,6 +27,8 @@ const registerSchema = yup.object().shape({
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
   picture: yup.string().required("required"),
+  birthday: yup.date().required("required"),
+  gender: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
@@ -40,6 +44,8 @@ const initialValuesRegister = {
   location: "",
   occupation: "",
   picture: "",
+  birthday: "M/D/YYYY",
+  gender: "",
 };
 
 const initialValuesLogin = {
@@ -136,9 +142,7 @@ const Form = () => {
                   onChange={handleChange}
                   value={values.firstName}
                   name="firstName"
-                  error={
-                    Boolean(touched.firstName) && Boolean(errors.firstName)
-                  }
+                  error={Boolean(touched.firstName) && Boolean(errors.firstName)}
                   helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
                 />
@@ -150,6 +154,26 @@ const Form = () => {
                   name="lastName"
                   error={Boolean(touched.lastName) && Boolean(errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Birthday"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.birthday}
+                  name="birthday"
+                  error={Boolean(touched.birthday) && Boolean(errors.birthday)}
+                  helperText={touched.birthday && errors.birthday}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Gender"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.gender}
+                  name="gender"
+                  error={Boolean(touched.gender) && Boolean(errors.gender)}
+                  helperText={touched.gender && errors.gender}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField

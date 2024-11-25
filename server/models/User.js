@@ -35,6 +35,14 @@ const UserSchema = new mongoose.Schema(
     },
     location: String,
     occupation: String,
+    birthday: {
+      type: String,
+      default: " "
+    },
+    gender: {
+      type: String,
+      default: " "
+    },
     viewedProfile: Number,
     impressions: Number,
   },

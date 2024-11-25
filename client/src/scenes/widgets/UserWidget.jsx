@@ -50,8 +50,12 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
     occupation,
     viewedProfile,
     impressions,
+    birthday,
+    gender,
     friends,
   } = user;
+
+  console.log(user);
 
   return (
     <WidgetWrapper>
@@ -79,7 +83,8 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
             >
               {isLoading? <Skeleton width={180} count={1} /> : `${firstName} ${lastName}`}
             </Typography>
-            <Typography color={medium}>{isLoading? <Skeleton count={1} />:`${friends.length} friends`}</Typography>
+            <Typography color={medium}>{isLoading? <Skeleton count={1} /> : `${birthday} old, ${gender}`}</Typography>
+            <Typography color={medium}>{isLoading? <Skeleton count={1} /> : `${friends.length} friends`}</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />

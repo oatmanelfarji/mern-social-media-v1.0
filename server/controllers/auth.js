@@ -15,6 +15,8 @@ export const register = async (req, res) => {
       friends,
       location,
       occupation,
+      birthday,
+      gender,
     } = req.body;
 
     const salt = await bcrypt.genSalt();
@@ -29,6 +31,8 @@ export const register = async (req, res) => {
       friends,
       location,
       occupation,
+      birthday,
+      gender,
       viewedProfile: Math.floor(Math.random() * 10000),
       impressions: Math.floor(Math.random() * 10000),
     });
