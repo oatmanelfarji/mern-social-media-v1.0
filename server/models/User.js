@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema(
     location: String,
     occupation: String,
     birthday: {
-      type: String,
+      type: Date,
       default: " "
     },
     gender: {

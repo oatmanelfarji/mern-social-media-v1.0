@@ -3,11 +3,10 @@ import {
   Box,
   Button,
   TextField,
+  MenuItem,
   useMediaQuery,
   Typography,
   useTheme,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
@@ -44,8 +43,8 @@ const initialValuesRegister = {
   location: "",
   occupation: "",
   picture: "",
-  birthday: "M/D/YYYY",
-  gender: "",
+  birthday: "",
+  gender: "male",
 };
 
 const initialValuesLogin = {
@@ -145,6 +144,7 @@ const Form = () => {
                   error={Boolean(touched.firstName) && Boolean(errors.firstName)}
                   helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Last Name"
@@ -155,6 +155,7 @@ const Form = () => {
                   error={Boolean(touched.lastName) && Boolean(errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Birthday"
@@ -165,17 +166,24 @@ const Form = () => {
                   error={Boolean(touched.birthday) && Boolean(errors.birthday)}
                   helperText={touched.birthday && errors.birthday}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
+                  select
                   label="Gender"
+                  name="gender"
+                  variant="outlined"
+                  value={values.gender || ''}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.gender}
-                  name="gender"
                   error={Boolean(touched.gender) && Boolean(errors.gender)}
                   helperText={touched.gender && errors.gender}
                   sx={{ gridColumn: "span 2" }}
-                />
+                  required
+                >
+                  <MenuItem value="male">Male</MenuItem>
+                  <MenuItem value="female">Female</MenuItem>
+                </TextField>
                 <TextField
                   label="Location"
                   onBlur={handleBlur}
@@ -185,6 +193,7 @@ const Form = () => {
                   error={Boolean(touched.location) && Boolean(errors.location)}
                   helperText={touched.location && errors.location}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <TextField
                   label="Occupation"
@@ -197,6 +206,7 @@ const Form = () => {
                   }
                   helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <Box
                   gridColumn="span 4"
@@ -243,6 +253,7 @@ const Form = () => {
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 4" }}
+              required
             />
             <TextField
               label="Password"
@@ -254,6 +265,7 @@ const Form = () => {
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
+              required
             />
           </Box>
 

@@ -20,6 +20,8 @@ function App() {
   const isAuth = Boolean(useSelector((state) => state.authReducer.token));
   const [socket, setSocket] = useState(null)
 
+  console.log('dayjs() - ', dayjs());
+
   const setPostTimeDiff = (createdAt, stampOf=null)=>{
     const timeStamp = dayjs(createdAt)
     // console.log(timeStamp.format("dddd, MMMM D YYYY"))
@@ -27,6 +29,7 @@ function App() {
     const date = timeStamp.format("DD-MM-YYYY")
     if(stampOf==="chats") return {date, time}
     const timeIntervalInMilliseconds = dayjs().diff(dayjs(createdAt))
+    const years = Math.floor(timeIntervalInMilliseconds/(1000*60*60*24*30*365))
     const months = Math.floor(timeIntervalInMilliseconds/(1000*60*60*24*30))
     const weeks = Math.floor(timeIntervalInMilliseconds/((1000*60*60*24*7)))
     const days = Math.floor(timeIntervalInMilliseconds/(1000*60*60*24))
@@ -34,9 +37,14 @@ function App() {
     const minutes = Math.floor((timeIntervalInMilliseconds % 3600000) / 60000);
     const seconds = Math.floor((timeIntervalInMilliseconds % 60000) / 1000);
 
-    if(months > 0) return `${months}mo`
-    if(weeks > 0) return `${weeks}w`
-    if(days > 0) return `${days}d`
+    if(years === 1) return `${years} year`
+    if(years > 1) return `${years} years`
+    if(months === 1) return `${months}month`
+    if(months > 1) return `${months}months`
+    if(weeks === 1) return `${weeks}wweek`
+    if(weeks > 1) return `${weeks}wweeks`
+    if(days === 1) return `${days}day`
+    if(days > 1) return `${days}days`
     if(hours !== 0){
       return `${hours}h`
     }else if(hours === 0 && minutes !== 0){
@@ -44,6 +52,8 @@ function App() {
     }
     return `${seconds}s`
   }
+
+  
 
   useEffect(()=>{
     setSocket(io(env.serverEndpoint()))

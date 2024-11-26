@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { env } from "config";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import dayjs from "dayjs";
 
 const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
   const [user, setUser] = useState(null);
@@ -51,25 +52,34 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
     viewedProfile,
     impressions,
     birthday,
-    gender,
+    //gender,
     friends,
   } = user;
 
   console.log(user);
 
   return (
+
     <WidgetWrapper>
+
       {/* FIRST ROW */}
+
       <FlexBetween
         gap="0.5rem"
         pb="1.1rem"
         onClick={() => navigate(`/profile/${userId}`)}
       >
+
         <FlexBetween gap="1rem">
-          {isLoading?<Skeleton circle height={70} width={70} containerClassName="avatar-skeleton" />:
+
+          {isLoading ? <Skeleton circle height={70} width={70} containerClassName="avatar-skeleton" /> :
+
             <UserImage image={picturePath} />
+
           }
+
           <Box>
+
             <Typography
               variant="h5"
               color={dark}
@@ -81,30 +91,58 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
                 },
               }}
             >
-              {isLoading? <Skeleton width={180} count={1} /> : `${firstName} ${lastName}`}
+              {isLoading ? <Skeleton width={180} count={1} /> : `${firstName} ${lastName}`}
+
             </Typography>
-            <Typography color={medium}>{isLoading? <Skeleton count={1} /> : `${birthday} old, ${gender}`}</Typography>
-            <Typography color={medium}>{isLoading? <Skeleton count={1} /> : `${friends.length} friends`}</Typography>
+
+            <Typography color={medium}>
+
+              {isLoading ? <Skeleton count={1} /> : `Birthday ${dayjs(birthday).format("DD MMM")}`}
+
+            </Typography>
+
+            <Typography color={medium}>
+
+              {isLoading ? <Skeleton count={1} /> : `${friends.length} friends`}
+
+            </Typography>
+
           </Box>
+
         </FlexBetween>
+
         <ManageAccountsOutlined />
+
       </FlexBetween>
 
       <Divider />
 
       {/* SECOND ROW */}
-      
+
       <Box p="1rem 0">
-        {isLoading ?<Skeleton height={20}  count={2}/>:<>
-        <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-          <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{location}</Typography>
-        </Box>
-        <Box display="flex" alignItems="center" gap="1rem">
-          <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{occupation}</Typography>
-        </Box>
-        </>
+
+        {isLoading ? <Skeleton height={20} count={2} /> :
+
+          <>
+
+            <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+
+              <LocationOnOutlined fontSize="large" sx={{ color: main }} />
+
+              <Typography color={medium}>{location}</Typography>
+
+            </Box>
+
+            <Box display="flex" alignItems="center" gap="1rem">
+
+              <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
+
+              <Typography color={medium}>{occupation}</Typography>
+
+            </Box>
+
+          </>
+
         }
       </Box>
 
@@ -113,7 +151,7 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
       {/* THIRD ROW */}
       <Box p="1rem 0">
         {
-          isLoading ?<Skeleton height={20}  count={2}/>:<>
+          isLoading ? <Skeleton height={20} count={2} /> : <>
             <FlexBetween mb="0.5rem">
               <Typography color={medium}>Who's viewed your profile</Typography>
               <Typography color={main} fontWeight="500">
@@ -138,7 +176,7 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
           Social Profiles
         </Typography>
         {
-          isLoading ?<Skeleton height={40}  count={2}/>:<>
+          isLoading ? <Skeleton height={40} count={2} /> : <>
             <FlexBetween gap="1rem" mb="0.5rem">
               <FlexBetween gap="1rem">
                 <img src="../assets/twitter.png" alt="twitter" />

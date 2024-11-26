@@ -32,12 +32,23 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
         },
       }
     );
+
+    console.log(response); // Check the response
+    
     const data = await response.json();
+
+    console.log(data); // Check the data
+
     const isFrnd = data.find(frnd => frnd._id === friendId)
+
     if (isFrnd) handleNotification(3)
+
     if (!isFrnd) {
+
       const response = await fetch(
+
         `${env.serverEndpoint()}/conversations/${_id}/${friendId}`,
+
         {
           method: "DELETE",
           headers: {
@@ -46,6 +57,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
           },
         }
       );
+      
       window.location.reload()
     }
     dispatch(setFriends({ friends: data }));
@@ -96,7 +108,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0);
+            navigate(0); // temporary fix
           }}
         >
           <Typography

@@ -5,10 +5,10 @@ import Navbar from "scenes/navbar";
 import UserWidget from "scenes/widgets/UserWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
-import AdvertWidget from "scenes/widgets/AdvertWidget";
+//import AdvertWidget from "scenes/widgets/AdvertWidget";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
 import { useEffect, useRef, useState } from "react";
-import Skeleton from 'react-loading-skeleton';
+//import Skeleton from 'react-loading-skeleton';
 
 
 const HomePage = ({ socket, setPostTimeDiff }) => {

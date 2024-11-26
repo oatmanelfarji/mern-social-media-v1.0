@@ -4,9 +4,9 @@ import { setPosts, setUsers } from "state";
 import PostWidget from "./PostWidget";
 import {env} from "../../config";
 import Skeleton from "react-loading-skeleton";
-import { Box } from "@mui/material";
+//import { Box } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
-import FlexBetween from "components/FlexBetween";
+//import FlexBetween from "components/FlexBetween";
 
 
 const PostsWidget = ({ userId, socket, isProfile = false, setPostTimeDiff }) => {
