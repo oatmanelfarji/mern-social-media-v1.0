@@ -13,6 +13,7 @@ import LoginPage from "scenes/loginPage";
 import Messenger from "scenes/Messenger/index22";
 import SearchResults from "scenes/SearchResults";
 import ProfileSettings from "scenes/profilePage/Settings";
+import Help from "scenes/helpPage/Help";
 
 function App() {
   const mode = useSelector((state) => state.authReducer.mode);
@@ -76,6 +77,14 @@ function App() {
               path="/profile/:userId"
               element={isAuth ? <ProfilePage setPostTimeDiff={setPostTimeDiff} /> : <Navigate to="/" />}
             />
+            <Route
+              path="/settings"
+              element={isAuth ? <ProfileSettings /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/help"
+              element={isAuth ? <Help /> : <Navigate to="/" />}
+            />
             <Route 
               path="/messenger"
               element={isAuth ? <Messenger setPostTimeDiff={setPostTimeDiff} socket={socket} /> : <Navigate to="/" />}
@@ -84,10 +93,7 @@ function App() {
               path="/search-results"
               element={isAuth ? <SearchResults /> : <Navigate to="/" />}
             />
-            <Route
-              path="/settings"
-              element={isAuth ? <ProfileSettings /> : <Navigate to="/" />}
-            />
+            
             
           </Routes>
         </ThemeProvider>

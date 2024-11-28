@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { 
-    IconButton,
-    Avatar,
-    Menu,
-    MenuItem,
-    Badge,
-    styled,
-    ListItemIcon,
-    ListItemText,
+import {
+  IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
+  Badge,
+  styled,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
 } from '@mui/material';
-import { 
-    Logout,
-    Person,
-    Help
+import {
+  Logout,
+  Person,
+  Help
 } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from "state";
@@ -64,21 +65,23 @@ const AvatarMenu = () => {
 
   return (
     <div>
-      <IconButton
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <StyledBadge
-          overlap="circular"
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          variant="dot"
+      <Tooltip title="Profile" placement="bottom">
+        <IconButton
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
         >
+          <StyledBadge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            variant="dot"
+          >
             <Avatar alt={Fullname} src={PicturePath} />
-        </StyledBadge>
-      </IconButton>
+          </StyledBadge>
+        </IconButton>
+      </Tooltip>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -90,15 +93,15 @@ const AvatarMenu = () => {
       >
         <MenuItem onClick={handleClose}>
           <ListItemIcon><Person /></ListItemIcon>
-          <ListItemText>Profile</ListItemText> 
+          <ListItemText>Profile</ListItemText>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon><Help /></ListItemIcon>
-          <ListItemText>Help</ListItemText> 
+          <ListItemText>Help</ListItemText>
         </MenuItem>
-        <MenuItem onClick={ () => dispatch(setLogout()) }>
-          <ListItemIcon><Logout /></ListItemIcon> 
-          <ListItemText>Logout</ListItemText> 
+        <MenuItem onClick={() => dispatch(setLogout())}>
+          <ListItemIcon><Logout /></ListItemIcon>
+          <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
     </div>

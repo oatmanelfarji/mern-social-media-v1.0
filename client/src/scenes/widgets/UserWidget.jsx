@@ -4,7 +4,7 @@ import {
   LocationOnOutlined,
   WorkOutlineOutlined,
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
+import { Box, Typography, Divider, useTheme, Tooltip } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -110,8 +110,9 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
           </Box>
 
         </FlexBetween>
-
-        <ManageAccountsOutlined />
+        <Tooltip title="Edit profile" placement="bottom">
+        <ManageAccountsOutlined cursor="pointer" />
+        </Tooltip>
 
       </FlexBetween>
 
@@ -148,7 +149,7 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
 
       <Divider />
 
-      {/* THIRD ROW */}
+      {/* THIRD ROW 
       <Box p="1rem 0">
         {
           isLoading ? <Skeleton height={20} count={2} /> : <>
@@ -168,7 +169,7 @@ const UserWidget = ({ userId, picturePath, isLoading, setIsLoading }) => {
         }
       </Box>
 
-      <Divider />
+      <Divider />*/}
 
       {/* FOURTH ROW */}
       <Box p="1rem 0">

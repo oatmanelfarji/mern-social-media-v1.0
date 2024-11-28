@@ -10,9 +10,32 @@ body,
   /* overflow-y: hidden; */
 }
 
-
-
 .navtitle{
   font-weight:"bold";
   font-size:"2rem";
+}
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0c0c0c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #179c1b;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1dbd22;
 }

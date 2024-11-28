@@ -4,9 +4,8 @@ import {
     IconButton,
     InputBase,
     Typography,
-    //Select,
+    MenuList,
     MenuItem,
-    //FormControl,
     useTheme,
     useMediaQuery,
     Popover,
@@ -14,6 +13,7 @@ import {
     Divider,
     ListItemIcon,
     ListItemText,
+    Tooltip,
 } from "@mui/material";
 import {
     Search,
@@ -146,13 +146,11 @@ const Navbar = ({ socket, lowerBodyRef }) => {
         <FlexBetween
             padding="1rem 6%"
             backgroundColor={alt}
-        // boxShadow="2px 2px 8px black"
         // boxShadow="2px 2px 2px #e0e0e0"
         >
             <FlexBetween gap="1.75rem">
                 <Typography
                     fontWeight="bold"
-                    // fontSize="clamp(1rem, 2rem, 2.25rem)"
                     fontSize="clamp(1rem, 2rem, 2.25rem)"
                     color="primary"
                     onClick={() => navigate("/home")}
@@ -163,7 +161,7 @@ const Navbar = ({ socket, lowerBodyRef }) => {
                         },
                     }}
                 >
-                    <button title="Nexus.point" style={{ cursor: "pointer", background: "transparent", border: "none" }}>
+                    <button title="Family Unite, MemoryBook, PrivateBook" style={{ cursor: "pointer", background: "transparent", border: "none" }}>
                         <img src="/assets/logo.png" alt="logo" width="38px" style={{ pointerEvents: "none" }} />
                     </button>
                 </Typography>
@@ -201,31 +199,37 @@ const Navbar = ({ socket, lowerBodyRef }) => {
             {/* DESKTOP NAV */}
             {isNonMobileScreens ? (
                 <FlexBetween gap="2rem">
-                    <IconButton onClick={() => dispatch(setMode())}>
-                        {theme.palette.mode === "dark" ? (
-                            <DarkMode sx={{ fontSize: "25px" }} />
-                        ) : (
-                            <LightMode sx={{ color: dark, fontSize: "25px" }} />
-                        )}
-                    </IconButton>
-                    <Link
-                        style={{ textDecoration: "none", color: "white" }}
-                        to="/messenger"
-                    >
-                        <IconButton>
-                            <Badge
-                                variant={newMsgCount > 0 ? "dot" : ""}
-                                color="primary"
-                            >
-                                <Message sx={{ fontSize: "25px" }} />
+                    <Tooltip title="Dark Mode" placement="bottom">
+                        <IconButton onClick={() => dispatch(setMode())}>
+                            {theme.palette.mode === "dark" ? (
+                                <DarkMode sx={{ fontSize: "25px" }} />
+                            ) : (
+                                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                            )}
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Messenger" placement="bottom">
+                        <Link
+                            style={{ textDecoration: "none", color: "white" }}
+                            to="/messenger"
+                        >
+                            <IconButton>
+                                <Badge
+                                    variant={newMsgCount > 0 ? "dot" : ""}
+                                    color="primary"
+                                >
+                                    <Message sx={{ fontSize: "25px" }} />
+                                </Badge>
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
+                    <Tooltip title="Notifications" placement="bottom">
+                        <IconButton onClick={(e) => handleClick(e)}>
+                            <Badge badgeContent={newNotiCounts} color="primary">
+                                <Notifications sx={{ fontSize: "25px" }} />
                             </Badge>
                         </IconButton>
-                    </Link>
-                    <IconButton onClick={(e) => handleClick(e)}>
-                        <Badge badgeContent={newNotiCounts} color="primary">
-                            <Notifications sx={{ fontSize: "25px" }} />
-                        </Badge>
-                    </IconButton>
+                    </Tooltip>
 
                     <Popover
                         anchorOrigin={{
@@ -252,38 +256,14 @@ const Navbar = ({ socket, lowerBodyRef }) => {
                             ))
                         )}
                     </Popover>
+                    <Tooltip title="Help" placement="bottom">
+                        <Link to="/help" style={{ textDecoration: "none", color: "white" }}>
+                            <Help sx={{ fontSize: "25px" }} />
+                        </Link>
+                    </Tooltip>
 
-                    <Help sx={{ fontSize: "25px" }} />
                     <AvatarMenu />
 
-                    {/*
-                    <FormControl variant="standard" value={fullName}>
-                        <Select
-                            value={fullName}
-                            sx={{
-                                backgroundColor: neutralLight,
-                                width: "150px",
-                                borderRadius: "0.25rem",
-                                p: "0.25rem 1rem",
-                                "& .MuiSvgIcon-root": {
-                                    pr: "0.25rem",
-                                    width: "3rem",
-                                },
-                                "& .MuiSelect-select:focus": {
-                                    backgroundColor: neutralLight,
-                                },
-                            }}
-                            input={<InputBase />}
-                        >
-                            <MenuItem value={fullName}>
-                                <Typography>{fullName}</Typography>
-                            </MenuItem>
-                            <MenuItem onClick={() => dispatch(setLogout())}>
-                                Log Out
-                            </MenuItem>
-                        </Select>
-                    </FormControl>
-                    */}
 
                 </FlexBetween>
             ) : (
@@ -318,110 +298,65 @@ const Navbar = ({ socket, lowerBodyRef }) => {
                     </Box>
 
                     {/* MENU ITEMS */}
-                    <FlexBetween
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
+                    <FlexBetween>
+                        <MenuList sx={{
+                            width: "300px",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "2rem"
+                        }}>
+                            <MenuItem onClick={handleClose} >
 
-                        /*********************************/
-
-                        alignItems="start"
-
-                        /*********************************/
-                        
-                        gap="1rem"
-                    >
-                        <MenuItem onClick={handleClose} >
-                            <ListItemIcon>
-                                <Person sx={{ fontSize: "2rem" }} />
-                            </ListItemIcon>
-                            <ListItemText
-                                primary="Profile"
-                                secondary={fullName}
-                            />
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} >
-                            
-                            <Link
-                                style={{ textDecoration: "none", color: "white" }}
-                                to="/messenger"
-                            >   
-                                <FlexBetween gap="1rem">
-
-                                <ListItemIcon>
+                                <ListItemIcon sx={{ width: "4rem" }}>
+                                    <Person sx={{ fontSize: "2rem" }} />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary="Profile"
+                                    secondary={fullName}
+                                />
+                            </MenuItem>
+                            <MenuItem onClick={handleClose} >
+                                <ListItemIcon sx={{ width: "4rem" }}>
                                     <Badge variant="dot" color="primary">
                                         <Message sx={{ fontSize: "2rem" }} />
                                     </Badge>
                                 </ListItemIcon>
                                 <ListItemText primary="Messages" />
-
-                                </FlexBetween>
-
-                            </Link>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                            <ListItemIcon>
-                                <Badge badgeContent={newNotiCounts} color="primary">
-                                    <Notifications
-                                        onClick={(e) => handleClick(e)}
-                                        sx={{ fontSize: "2rem" }}
-                                    />
-                                </Badge>
-                            </ListItemIcon>
-                            <ListItemText primary="Notifications" />
-                        </MenuItem>
-                        <MenuItem onClose={handleClose} onClick={() => dispatch(setMode())}>
-                            <ListItemIcon>
-                                {theme.palette.mode === "dark" ? (
-                                    <DarkMode sx={{ fontSize: "2rem" }} />
-                                ) : (
-                                    <LightMode
-                                        sx={{ color: dark, fontSize: "2rem" }}
-                                    />
-                                )}
-                            </ListItemIcon>
-                            <ListItemText primary="Theme Mode" />
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                            <ListItemIcon>
-                                <Help sx={{ fontSize: "2rem" }} />
-                            </ListItemIcon>
-                            <ListItemText primary="Help" />
-                        </MenuItem>
-                        <MenuItem onClose={handleClose} onClick={() => dispatch(setLogout())}>
-                            <ListItemIcon>
-                                <Logout sx={{ fontSize: "2rem" }} />
-                            </ListItemIcon>
-                            <ListItemText primary="Log Out" />
-                        </MenuItem>
-                        {/* 
-                        <FormControl variant="standard" value={fullName}>
-                            <Select
-                                value={fullName}
-                                sx={{
-                                    backgroundColor: neutralLight,
-                                    width: "150px",
-                                    borderRadius: "0.25rem",
-                                    p: "0.25rem 1rem",
-                                    "& .MuiSvgIcon-root": {
-                                        pr: "0.25rem",
-                                        width: "3rem",
-                                    },
-                                    "& .MuiSelect-select:focus": {
-                                        backgroundColor: neutralLight,
-                                    },
-                                }}
-                                input={<InputBase />}
-                            >
-                                <MenuItem value={fullName}>
-                                    <Typography>{fullName}</Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => dispatch(setLogout())}>
-                                    Log Out
-                                </MenuItem>
-                            </Select>
-                        </FormControl>
-                        */}
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <ListItemIcon sx={{ width: "4rem" }}>
+                                    <Badge badgeContent={newNotiCounts} color="primary">
+                                        <Notifications
+                                            onClick={(e) => handleClick(e)}
+                                            sx={{ fontSize: "2rem" }}
+                                        />
+                                    </Badge>
+                                </ListItemIcon>
+                                <ListItemText primary="Notifications" />
+                            </MenuItem>
+                            <MenuItem onClose={handleClose} onClick={() => dispatch(setMode())}>
+                                <ListItemIcon sx={{ width: "4rem" }}>
+                                    {theme.palette.mode === "dark" ? (
+                                        <DarkMode sx={{ fontSize: "25px" }} />
+                                    ) : (
+                                        <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                                    )}
+                                </ListItemIcon>
+                                <ListItemText primary="Toggle Mode" />
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <ListItemIcon sx={{ width: "4rem" }}>
+                                    <Help sx={{ fontSize: "2rem" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Help" />
+                            </MenuItem>
+                            <MenuItem onClose={handleClose} onClick={() => dispatch(setLogout())}>
+                                <ListItemIcon sx={{ width: "4rem" }}>
+                                    <Logout sx={{ fontSize: "2rem" }} />
+                                </ListItemIcon>
+                                <ListItemText primary="Log Out" />
+                            </MenuItem>
+                        </MenuList>
                     </FlexBetween>
                 </Box>
             )}

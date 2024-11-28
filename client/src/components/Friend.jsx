@@ -1,5 +1,5 @@
 import { PersonAddOutlined, PersonRemoveOutlined, Message } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "state";
@@ -7,7 +7,7 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { env } from "../config";
 
-const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUserId, postUserId, handleClickToChat, isBeingSearched=false}) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUserId, postUserId, handleClickToChat, isBeingSearched = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.authReducer.user);
@@ -34,7 +34,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
     );
 
     console.log(response); // Check the response
-    
+
     const data = await response.json();
 
     console.log(data); // Check the data
@@ -57,7 +57,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
           },
         }
       );
-      
+
       window.location.reload()
     }
     dispatch(setFriends({ friends: data }));
@@ -130,30 +130,35 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
           </Typography>
         </Box>
       </FlexBetween>
-        {postUserId !== _id &&
-      <FlexBetween gap="5px">
+      {postUserId !== _id &&
+        <FlexBetween gap="5px">
 
           {(!window.location.pathname.includes("messenger")) &&
-          <IconButton
-            onClick={() => patchFriend()}
-            // sx={{ backgroundColor: primaryLight, p: "0.3rem" }}
-          >
-            {isFriend ? (
-              <PersonRemoveOutlined sx={{ color: primaryDark }} />
+            <Tooltip title={isFriend ? "Remove Friend" : "Add Friend"} placement="bottom">
+              <IconButton
+                onClick={() => patchFriend()}
+              // sx={{ backgroundColor: primaryLight, p: "0.3rem" }}
+              >
+                {isFriend ? (
+                  <PersonRemoveOutlined sx={{ color: primaryDark }} />
 
-            ) : (
-              <PersonAddOutlined sx={{ color: primaryDark }} />
-            )}
-          </IconButton>}
-        {!isBeingSearched&&isFriend&&
-          <IconButton
-            // sx={{ backgroundColor: primaryLight, p: "0.2rem" }}
-            onClick={() => startConversation()}
-          >
-            <Message sx={{ fontSize: "20px" }} />
-          </IconButton>
-        }
-      </FlexBetween>}
+                ) : (
+                  <PersonAddOutlined sx={{ color: primaryDark }} />
+                )}
+              </IconButton>
+            </Tooltip>
+          }
+          {!isBeingSearched && isFriend &&
+            <Tooltip title="Send Message" placement="bottom">
+              <IconButton
+                // sx={{ backgroundColor: primaryLight, p: "0.2rem" }}
+                onClick={() => startConversation()}
+              >
+                <Message sx={{ fontSize: "20px" }} />
+              </IconButton>
+            </Tooltip>
+          }
+        </FlexBetween>}
     </FlexBetween>
   );
 };

@@ -1,6 +1,5 @@
-import { Box, Divider, List, ListItem, Typography } from '@mui/material'
+import { Box, List, Typography } from '@mui/material'
 import WidgetWrapper from 'components/WidgetWrapper'
-import React, { useState } from 'react'
 import Friend from 'components/Friend'
 import Loading from 'components/Loading'
 import { Link } from 'react-router-dom'

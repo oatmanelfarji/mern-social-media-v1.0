@@ -35,15 +35,15 @@
     - add a new component to show all friends from search results
     - <s>disable suggestions on blur from input</s>
     - <s>notification count on new message</s>
-    - <s>add user Avatar to desktop navbar with dropdown:</s>
-        - profile settings
-        - help
-        - <s>logout</s>
+    - <s>add user Avatar to desktop navbar with dropdown menu</s>
+    - add to help page
+    - <s>logout</s>
     - <s>update mobile navbar with icons</s>
 
 - Profile page
     - <s>fix reload problem</s>
     - add social media links to the social media icons
+    - add a new component to show and edit profile settings
 
   - User widget
       - only go to profile page if user name or avatar is clicked
@@ -58,7 +58,7 @@
       - add birthday
       - add gender
 
-  - help page
+  - add a new component to show help page
 
   ## Issues
   - fix infinite scroll problem
