@@ -7,7 +7,7 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { env } from "../config";
 
-const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUserId, postUserId, handleClickToChat, isBeingSearched = false }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUserId, postUserId, handleClickToChat, isBeingSearched=false}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.authReducer.user);
@@ -32,23 +32,14 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
         },
       }
     );
-
-    console.log(response); // Check the response
-
     const data = await response.json();
-
-    console.log(data); // Check the data
-
+    console.log('data - ', data)
     const isFrnd = data.find(frnd => frnd._id === friendId)
-
+    console.log('isFrnd - ', isFrnd)
     if (isFrnd) handleNotification(3)
-
     if (!isFrnd) {
-
-      const response = await fetch(
-
+      const responses = await fetch(
         `${env.serverEndpoint()}/conversations/${_id}/${friendId}`,
-
         {
           method: "DELETE",
           headers: {
@@ -57,7 +48,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, socket, loggedInUse
           },
         }
       );
-
+      console.log(responses)
       window.location.reload()
     }
     dispatch(setFriends({ friends: data }));

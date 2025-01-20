@@ -33,16 +33,15 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    location: String,
-    occupation: String,
     birthday: {
       type: Date,
-      default: " "
+      default: Date.now
     },
     gender: {
       type: String,
-      default: " "
     },
+    location: String,
+    occupation: String,
     viewedProfile: Number,
     impressions: Number,
   },

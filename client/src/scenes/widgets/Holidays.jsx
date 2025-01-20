@@ -1,7 +1,7 @@
 import { Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
-import MoroccanHolidays from "./MoroccanHolidays";
+import MoroccanHolidaysList from "./MoroccanHolidaysList";
 import { env } from "config";
 
 const Holidays = () => {
@@ -12,19 +12,19 @@ const Holidays = () => {
 
   return (
     <WidgetWrapper>
-      <FlexBetween>
-        <Typography color={dark} variant="h5" fontWeight="500">
-            Holidays
-        </Typography>
-        <Typography color={medium}>2024/2025</Typography>
-      </FlexBetween>
       <img
         width="100%"
         height="auto"
         alt="advert"
         src={`${env.serverEndpoint()}/assets/holidays1.png`}
       />
-      <MoroccanHolidays />
+      <FlexBetween>
+        <Typography color={dark} variant="h5" fontWeight="500">
+            Holidays
+        </Typography>
+        <Typography color={medium}>2024/2025</Typography>
+      </FlexBetween>
+      <MoroccanHolidaysList />
     </WidgetWrapper>
   );
 };

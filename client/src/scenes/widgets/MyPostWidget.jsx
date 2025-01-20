@@ -16,6 +16,7 @@ import {
   Button,
   IconButton,
   useMediaQuery,
+  TextField,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
@@ -63,8 +64,11 @@ const MyPostWidget = ({ picturePath }) => {
     <WidgetWrapper>
       <FlexBetween gap="1.5rem">
         <UserImage image={picturePath} />
-        <InputBase
+        <TextField
           placeholder="What's on your mind..."
+          multiline
+          maxRows={12}
+          variant="standard"
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{

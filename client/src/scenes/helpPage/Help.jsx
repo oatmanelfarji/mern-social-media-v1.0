@@ -25,10 +25,9 @@ const Help = ({ socket, setPostTimeDiff }) => {
       return;
     }
   }
+  
   useEffect(() => {
     socket?.emit("new-user", _id)
-    
-    console.log()
   }, [socket, _id])
 
   return (

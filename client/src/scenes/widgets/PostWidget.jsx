@@ -4,7 +4,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, IconButton, InputBase, Typography, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, InputBase, Tooltip, Typography, useTheme } from "@mui/material";
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
@@ -65,7 +65,7 @@ const PostWidget = ({
 
   };
 
-  
+
 
   const AddComment = async () => {
     const response = await fetch(`${env.serverEndpoint()}/posts/${postId}/comment`, {
@@ -152,6 +152,7 @@ const PostWidget = ({
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
+          <Tooltip title="Likes">
             <IconButton onClick={patchLike}>
               {isLiked ? (
                 <FavoriteOutlined sx={{ color: primary }} />
@@ -159,13 +160,16 @@ const PostWidget = ({
                 <FavoriteBorderOutlined />
               )}
             </IconButton>
+          </Tooltip>
             <Typography>{likeCount}</Typography>
           </FlexBetween>
 
           <FlexBetween gap="0.3rem">
+            <Tooltip title="Comments">
             <IconButton onClick={() => handleOnOpenComment()}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
+            </Tooltip>
             <Typography>{comments.length}</Typography>
           </FlexBetween>
         </FlexBetween>
@@ -174,12 +178,18 @@ const PostWidget = ({
           {loggedInUserId === postUserId ?
             <>
               <ThreeDotsDropDown clickActions={{ handleDeletePost }} postId={postId} />
+              <Tooltip title="Share">
+                <IconButton>
+                  <ShareOutlined />
+                </IconButton>
+              </Tooltip>
+            </> :
+            <Tooltip title="Share">
               <IconButton>
                 <ShareOutlined />
-              </IconButton> </> :
-            <IconButton>
-              <ShareOutlined />
-            </IconButton>}
+              </IconButton>
+            </Tooltip>
+          }
         </FlexBetween>
       </FlexBetween>
       {isComments && (

@@ -21,8 +21,6 @@ function App() {
   const isAuth = Boolean(useSelector((state) => state.authReducer.token));
   const [socket, setSocket] = useState(null)
 
-  console.log('dayjs() - ', dayjs());
-
   const setPostTimeDiff = (createdAt, stampOf=null)=>{
     const timeStamp = dayjs(createdAt)
     // console.log(timeStamp.format("dddd, MMMM D YYYY"))
@@ -40,25 +38,19 @@ function App() {
 
     if(years === 1) return `${years} year`
     if(years > 1) return `${years} years`
-    if(months === 1) return `${months}month`
-    if(months > 1) return `${months}months`
-    if(weeks === 1) return `${weeks}wweek`
-    if(weeks > 1) return `${weeks}wweeks`
-    if(days === 1) return `${days}day`
-    if(days > 1) return `${days}days`
-    if(hours !== 0){
-      return `${hours}h`
-    }else if(hours === 0 && minutes !== 0){
-      return `${minutes}m`
-    }
-    return `${seconds}s`
+    if(months === 1) return `${months} month`
+    if(months > 1) return `${months} months`
+    if(weeks === 1) return `${weeks} week`
+    if(weeks > 1) return `${weeks} weeks`
+    if(days === 1) return `${days} day`
+    if(days > 1) return `${days} days`
+    if(hours !== 0){return `${hours} h`}
+    else if(hours === 0 && minutes !== 0){return `${minutes} m`}
+    return `${seconds} s`
   }
-
-  
 
   useEffect(()=>{
     setSocket(io(env.serverEndpoint()))
-    
   },[])
 
   return (
